@@ -1,0 +1,7 @@
+E:\C#\twolist\twolist\bin\Debug\twolist.exe
+E:\C#\twolist\twolist\bin\Debug\twolist.pdb
+E:\C#\twolist\twolist\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\C#\twolist\twolist\obj\x86\Debug\twolist.exe
+E:\C#\twolist\twolist\obj\x86\Debug\twolist.pdb
+F:\MatObes\twolist\twolist\obj\x86\Debug\twolist.exe
+F:\MatObes\twolist\twolist\obj\x86\Debug\twolist.pdb
