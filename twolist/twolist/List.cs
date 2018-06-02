@@ -154,6 +154,7 @@ namespace twolist
                             p.prev = nE;
                         }
                         else Head = nE;
+                        count++;
                         return;
                     }
                 }
@@ -185,6 +186,7 @@ namespace twolist
                             p.next = nE;
                         }
                         else Last = nE;
+                        count++;
                         return;
                     }
                 }
@@ -204,7 +206,8 @@ namespace twolist
                     Head.next.prev = null;
                     Head = Head.next;
                 }
-                else  Head = Last = null; 
+                else  Head = Last = null;
+                count--;
             }
 
         }
@@ -221,72 +224,84 @@ namespace twolist
                     Last.prev.next = null;
                     Last = Last.prev;
                 }
-                else Head = Last = null; 
+                else Head = Last = null;
+                count--;
             }
-            //else return 0;
         }
 
         /// <summary>
         /// Удаление элемента перед заданным (метод №10)
         /// </summary>
-        /// <param name="beforeThisIndex"></param>
+        /// <param name="beforeThisIndex">Индекс перед которым необходимо удалить</param>
         public void DelBefore(int beforeThisIndex)
         {
-            if (Count < 2)
+            if (count < 2 || beforeThisIndex < 1 || beforeThisIndex > count-1)
                 return;
 
-            int count = Count;
-            Element p = Last;
-            while ((p.prev != null) && (count != beforeThisIndex))
+            Element p = Head.next;
+            for (int i = 1; p != null; i++, p = p.next)
             {
-                p = p.prev;
-                count--;
-            }
-            if (p.prev != null)
-            {
-                if (p.prev.prev != null)
+                if (i == beforeThisIndex)
                 {
+                    if (p.prev.prev != null) p.prev.prev.next = p;
                     p.prev = p.prev.prev;
-                    p.prev.next = p.prev.next.next;
-                }
-                else
-                {
-                    p.prev = null;
-                    Head = p;
+                    count--;
+                    break;
                 }
             }
         }
+
         /// <summary> 
         /// Удаление элемента после заданного (метод №12)
         /// </summary>
-        /// <param name="n"></param>
-        public void DelAfter(int n)
+        /// <param name="afterThisIndex">Индекс после которого нужно удалить</param>
+        public void DelAfter(int afterThisIndex)
         {
-            if (Count == 0)
+            if (count < 2 || afterThisIndex < 1 || afterThisIndex > count - 1)
                 return;
-            if (n == Count)
-                return;
-            int count = 1;
-            Element p = Head;
-            while ((p.next != null) && (count != n))
-            {
-                p = p.next;
-                count++;
-            }
-            if (p.next != null)
-            {
-                if (p.next.next != null)
-                {
-                    p.next = p.next.next;
-                    p.next.prev = p.next.prev.prev;
-                }
-                else
-                {
-                    p.next = null;
-                    Last = p;
-                }
-            }
 
+            Element p = Head;
+            for (int i = 0; p != null; i++, p = p.next)
+            {
+                if (i == afterThisIndex)
+                {
+                    if (p.next != null) break;
+                    if(p.next.next != null) p.next.next.prev = p;
+                    p.next = p.next.next;
+                    count--;
+                    break;
+                }
+            }
+        }
+        /// <summary>
+        /// 15. Вставить  после каждого элемента, занимающего четную позицию в списке, новый элемент Е1
+        /// </summary>
+        /// <param name="addItem"></param>
+        public void AddAfterEven(int addItem)
+        {
+            Element p = Head;
+            for (int i = 1; p!=null; i++, p = p.next)
+            {
+                if (i % 2 == 0)
+                {
+                    Element addElement = new Element(addItem);
+                    if (p.next != null) p.next.prev = addElement;
+                    p.next = addElement;
+                    p = p.next;
+                    count++;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 26. Поменять местами первый и последний элементы списка
+        /// </summary>
+        /// <param name="addItem"></param>
+        public void RearrangementOfHeadAndLast(int addItem)
+        {
+            int h = Head.inf;
+            Head.inf = Last.inf;
+            Last.inf = h;
         }
     }
 }

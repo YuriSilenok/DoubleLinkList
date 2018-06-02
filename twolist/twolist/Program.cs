@@ -35,7 +35,7 @@ namespace twolist
         /// </summary>
         /// <param name="Q"></param>
         /// <returns></returns>
-        static DoubleLinkList SearchByItemValue(int Q)
+        static DoubleLinkList SearchByItemValue(DoubleLinkList Q)
         {
             Console.WriteLine("Введите значение для поиска");
             int k;
@@ -43,7 +43,7 @@ namespace twolist
             if (int.TryParse(s, out k))
             {
                 Console.WriteLine("Поищем");
-                if (Q.Find(k) == true)
+                if (Q.Find(k) !=-1)
                 {
                     Console.WriteLine("Нашел");
                 }
