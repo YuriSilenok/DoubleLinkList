@@ -35,11 +35,24 @@ namespace twolist
         }
     }
 
-    class DoubleLinkList
+    public class DoubleLinkList
     {
         Element Head = null;
         Element Last = null;
         int count=0;
+
+        public int this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= count) throw new IndexOutOfRangeException();
+                Element p = Head;
+                for (int i = 0; p != null; i++, p = p.next)
+                    if (index == i) return p.inf;
+                throw new IndexOutOfRangeException();
+            }
+        }
+
         /// <summary>
         /// Добавление в начало (метод №1)
         /// </summary>
@@ -285,6 +298,8 @@ namespace twolist
                 if (i % 2 == 0)
                 {
                     Element addElement = new Element(addItem);
+                    addElement.next = p.next;
+                    addElement.prev = p;
                     if (p.next != null) p.next.prev = addElement;
                     p.next = addElement;
                     p = p.next;
