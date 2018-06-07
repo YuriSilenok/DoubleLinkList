@@ -290,22 +290,30 @@ namespace twolist
         /// 15. Вставить  после каждого элемента, занимающего четную позицию в списке, новый элемент Е1
         /// </summary>
         /// <param name="addItem"></param>
-        public void AddAfterEven(int addItem)
-        {
-            Element p = Head;
-            for (int i = 1; p!=null; i++, p = p.next)
-            {
-                if (i % 2 == 0)
-                {
-                    Element addElement = new Element(addItem);
+        public void AddAfterEven(int addItem) 
+        { 
+            Element p = Head; 
+            //перебор элементов списка и счетчик номера
+            for (int i = 1; p != null; i++, p = p.next) 
+            { 
+                //если номер элемента четный 
+                if (i % 2 == 0) 
+                { 
+                    Element addElement = new Element(addItem); 
+                    //ссылка на следующий элемент добавляемого элемента указывает на следующий элемент относительно текущего элемента
                     addElement.next = p.next;
+                    //ссылка на предыдущий элементы добавляемого элемента указывает на следующий элемент относительно текущего элемента
                     addElement.prev = p;
+                    //если за текущим элементом существует элемент, ссылка на предыдущий элементы последующего элемента относительно текущего элемента указывает на добавляемый элемент
                     if (p.next != null) p.next.prev = addElement;
-                    p.next = addElement;
-                    p = p.next;
-                    count++;
-                }
-            }
+                    //ссылка на последующий элемент относительно текущего элемента указывает на добавляемый элемент
+                    p.next = addElement; 
+                    //переход к следующемоу элементу
+                    p = p.next; 
+                    //увеличение количества элементов
+                    count++; 
+                } 
+            } 
         }
 
         /// <summary>
